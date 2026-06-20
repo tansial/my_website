@@ -1,0 +1,84 @@
+/* =============================================================================
+   mobile.css — phone layout. Layers on top of styles.css (shared theme).
+   The interactive graph is replaced by tappable keyword chips.
+   ========================================================================== */
+
+.wrap { padding: 22px 14px 64px; gap: 18px; }
+
+/* hero already stacks via the styles.css mobile media query */
+.hero-photo { width: 132px; height: 132px; }
+
+/* ---------- Topics (keyword chips, replaces the graph) ---------- */
+.topics-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.topics-hint {
+  font-size: 0.78rem;
+  color: var(--text-mute);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  --c: #5b8def;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--text);
+  background: color-mix(in srgb, var(--c) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c) 45%, var(--border));
+  border-radius: 999px;
+  padding: 9px 14px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.chip::before {
+  content: "";
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 8px var(--c);
+  margin-right: 7px;
+  vertical-align: middle;
+}
+.chip.is-top { font-weight: 700; }
+.chip:active { transform: scale(0.96); }
+.chip.active {
+  background: color-mix(in srgb, var(--c) 30%, transparent);
+  border-color: var(--c);
+  box-shadow: 0 0 0 1px var(--c), 0 0 14px -2px var(--c);
+  color: #fff;
+}
+
+/* Fallback for browsers without color-mix() */
+@supports not (color: color-mix(in srgb, red, blue)) {
+  .chip { background: rgba(79,143,247,0.12); border-color: var(--border-2); }
+  .chip.active { background: rgba(79,143,247,0.26); border-color: var(--accent); }
+}
+
+/* ---------- Desktop-version link ---------- */
+.m-deskline {
+  text-align: center;
+  margin-top: 6px;
+}
+.m-deskline a {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.76rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  border: 1px solid var(--border-2);
+  border-radius: 8px;
+  padding: 7px 13px;
+}
+.m-deskline a:active { color: var(--glow); border-color: var(--accent); }
+
+/* Slightly larger tap targets on the publication DOI buttons */
+.pub-doi { padding: 8px 12px; }

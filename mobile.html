@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alessandro Tansini — Researcher, Data Analyst &amp; Policy Support</title>
+  <meta name="description" content="Alessandro Tansini — energy engineer, PhD, researcher and data analyst specialised in road-vehicle CO₂ emissions, real-world monitoring and transport decarbonisation." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="mobile.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <nav class="topnav" aria-label="Section navigation">
+    <div class="topnav-inner">
+      <a class="topnav-brand" href="#hero">A. Tansini</a>
+      <div class="topnav-links">
+        <a href="#hero">About</a>
+        <a href="#topics">Topics</a>
+        <a href="#experience-section">Experience</a>
+        <a href="#skills-section">Skills</a>
+        <a href="#publications-section">Publications</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+
+    <!-- ===== HERO / PROFILE CARD ===== -->
+    <header class="card hero" id="hero"></header>
+
+    <!-- ===== KEYWORD CHIPS (replaces the graph on mobile) ===== -->
+    <section class="card" id="topics">
+      <div class="topics-head">
+        <h2 class="section-title">Expertise</h2>
+        <span class="topics-hint">tap a topic to see related publications</span>
+      </div>
+      <div id="chips" class="chips"></div>
+    </section>
+
+    <!-- ===== SUMMARY ===== -->
+    <section class="card" id="summary-section">
+      <h2 class="section-title">Professional summary</h2>
+      <p id="summary" class="summary"></p>
+    </section>
+
+    <!-- ===== EXPERIENCE ===== -->
+    <section class="card" id="experience-section">
+      <h2 class="section-title">Experience</h2>
+      <div id="experience" class="timeline"></div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section class="card" id="skills-section">
+      <h2 class="section-title">Skills &amp; tools</h2>
+      <div id="skills" class="skills"></div>
+    </section>
+
+    <!-- ===== RESOURCES & AWARDS ===== -->
+    <div class="two-col">
+      <section class="card" id="resources-section">
+        <h2 class="section-title">Published resources</h2>
+        <div id="resources" class="resources"></div>
+      </section>
+      <section class="card" id="awards-section">
+        <h2 class="section-title">Awards</h2>
+        <div id="awards" class="awards"></div>
+      </section>
+    </div>
+
+    <!-- ===== EDUCATION ===== -->
+    <section class="card" id="education-section">
+      <h2 class="section-title">Education</h2>
+      <div id="education" class="timeline timeline--compact"></div>
+    </section>
+
+    <!-- ===== PUBLICATIONS ===== -->
+    <section class="card" id="publications-section">
+      <div class="pub-head">
+        <h2 class="section-title">Publications</h2>
+        <span id="pub-count" class="pub-count"></span>
+      </div>
+      <div id="pub-filter" class="pub-filter" hidden></div>
+      <div id="publications" class="publications"></div>
+    </section>
+
+    <footer class="footer">
+      <span id="footer-name"></span>
+      <span class="footer-sep">·</span>
+      <span id="footer-year"></span>
+    </footer>
+
+    <div class="m-deskline">
+      <a href="index.html?full">View desktop version →</a>
+    </div>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="graph-alt-data.js"></script>
+  <script src="main.js"></script>
+  <script src="mobile.js"></script>
+</body>
+</html>

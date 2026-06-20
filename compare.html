@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Graph options — Alessandro Tansini</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .cmp-wrap { max-width: 1180px; margin: 0 auto; padding: 40px 22px 80px; }
+    .cmp-head { text-align: center; margin-bottom: 8px; }
+    .cmp-head h1 {
+      font-size: 1.6rem; font-weight: 800; margin: 0 0 6px;
+      background: linear-gradient(120deg,#fff,#9fc3ff);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .cmp-head p { color: var(--text-dim); margin: 0 auto; max-width: 680px; font-size: 0.95rem; }
+    .opt { margin-top: 26px; }
+    .opt-tag {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-family: "JetBrains Mono", monospace; font-size: 0.72rem;
+      letter-spacing: 0.18em; color: var(--accent-2); margin-bottom: 4px;
+    }
+    .opt-tag b { color: #fff; font-weight: 700; }
+    .opt-tag .pill {
+      font-size: 0.62rem; letter-spacing: 0.12em; padding: 2px 8px; border-radius: 999px;
+      border: 1px solid var(--border-2); color: var(--text-dim);
+    }
+    .opt-desc { color: var(--text-dim); font-size: 0.9rem; margin: 2px 0 10px; max-width: 760px; }
+    .graph-stage { height: 560px; }
+    #canvas-a, #canvas-b { width: 100%; height: 100%; display: block; cursor: crosshair; }
+    @media (max-width: 760px){ .graph-stage{ height: 460px; } }
+  </style>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="cmp-wrap">
+    <div class="cmp-head">
+      <h1>Expertise map — two options</h1>
+      <p>Same engine, two data designs. Hover either map to highlight a keyword's connections.
+         Pick the one you prefer and I'll wire it into the live site.</p>
+    </div>
+
+    <!-- Option A -->
+    <section class="opt graph-section revealed">
+      <div class="opt-tag"><span class="pill">OPTION A</span> <b>Current</b> · uniform clusters</div>
+      <p class="opt-desc">Even-weighted keywords grouped into six technical clusters — the version live on the site now.</p>
+      <div class="graph-stage">
+        <canvas id="canvas-a"></canvas>
+        <div id="legend-a" class="graph-legend"></div>
+      </div>
+    </section>
+
+    <!-- Option B -->
+    <section id="optb" class="opt graph-section revealed">
+      <div class="opt-tag"><span class="pill">OPTION B</span> <b>Weighted + soft skills</b> · size = importance</div>
+      <p class="opt-desc">The most recurrent, defining keywords are larger and ringed; minor ones stay small and
+         label on hover. Adds a warm “communication &amp; impact” cluster — science communication, presentation,
+         data visualization, stakeholder engagement, scientific writing and more.</p>
+      <div class="graph-stage">
+        <canvas id="canvas-b"></canvas>
+        <div id="legend-b" class="graph-legend"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="graph-alt-data.js"></script>
+  <script src="graph-engine.js"></script>
+  <script>
+    function legend(elId, clusters, labels) {
+      document.getElementById(elId).innerHTML = Object.keys(clusters).map(
+        (k) => `<span><i style="background:${clusters[k]};box-shadow:0 0 6px ${clusters[k]}"></i>${labels[k] || k}</span>`
+      ).join("");
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+      // Option A — original data & feel
+      legend("legend-a", DATA.graph.clusters, {
+        core:"core themes", powertrain:"powertrains", data:"data & sensing",
+        tools:"tools & methods", policy:"regulation", topic:"research topics",
+      });
+      initGraph("canvas-a", DATA.graph, { idleLabelMin: 1.3 });
+
+      // Option B — weighted + soft skills
+      legend("legend-b", GRAPH_ALT.clusters, {
+        core:"core themes", powertrain:"powertrains", data:"data & sensing",
+        tools:"tools & methods", policy:"regulation", soft:"communication & impact",
+      });
+      initGraph("canvas-b", GRAPH_ALT, {
+        idleLabelMin: 1.7, emphasizeTop: true,
+        sizeBase: 3, sizeScale: 2.2, sizePow: 1.7,
+      });
+    });
+  </script>
+</body>
+</html>
