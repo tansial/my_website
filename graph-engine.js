@@ -108,6 +108,15 @@
     let mouse = { x: -9999, y: -9999, active: false };
     let hovered = null;
     let selectedNode = null;
+    const touchEnabled = !!opts.touch;
+    const cam = touchEnabled ? { x: 0, y: 0, zoom: 1 } : null;
+    function screenToGraph(sx, sy) {
+      if (!cam) return { x: sx, y: sy };
+      return {
+        x: (sx - W / 2 - cam.x) / cam.zoom + W / 2,
+        y: (sy - H / 2 - cam.y) / cam.zoom + H / 2,
+      };
+    }
     // transform: screen = physics * scale + offset
     let tSX = null, tSY = null, tOX = 0, tOY = 0;
 
@@ -167,14 +176,14 @@
       tOX = padX - minx * tSX;
       tOY = padY - miny * tSY;
 
-      // screen coords + hover detection (in screen space)
       hovered = null;
       let best = 44 * 44;
+      const gm = screenToGraph(mouse.x, mouse.y);
       for (const n of nodes) {
         n.sx = n.x * tSX + tOX;
         n.sy = n.y * tSY + tOY;
         if (mouse.active) {
-          const dx = n.sx - mouse.x, dy = n.sy - mouse.y;
+          const dx = n.sx - gm.x, dy = n.sy - gm.y;
           const d2 = dx * dx + dy * dy;
           if (d2 < best) { best = d2; hovered = n; }
         }
@@ -185,6 +194,12 @@
     /* ---- draw ---- */
     function draw(t) {
       ctx.clearRect(0, 0, W, H);
+      ctx.save();
+      if (cam) {
+        ctx.translate(W / 2 + cam.x, H / 2 + cam.y);
+        ctx.scale(cam.zoom, cam.zoom);
+        ctx.translate(-W / 2, -H / 2);
+      }
       const focus = hovered || selectedNode;
       const neighbours = focus ? adj.get(focus) : null;
 
@@ -248,6 +263,7 @@
           ctx.fillText(n.label, lx, ly);
         }
       });
+      ctx.restore();
     }
 
     /* ---- loop ---- */
@@ -270,16 +286,87 @@
     if (onSelect) {
       canvas.addEventListener("click", (e) => {
         const rect = canvas.getBoundingClientRect();
-        const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+        const gp = screenToGraph(e.clientX - rect.left, e.clientY - rect.top);
         let hit = null, best = Infinity;
         for (const n of nodes) {
-          const dx = n.sx - mx, dy = n.sy - my;
+          const dx = n.sx - gp.x, dy = n.sy - gp.y;
           const d2 = dx * dx + dy * dy;
           const reach = n.r * 1.9 + 10;          // generous, since bubbles drift
           if (d2 < reach * reach && d2 < best) { best = d2; hit = n; }
         }
         selectedNode = (hit && hit === selectedNode) ? null : hit;  // click again to deselect
         onSelect(selectedNode);
+      });
+    }
+
+    if (touchEnabled) {
+      const tch = { s: null, pan: false, dist: 0, mid: null };
+      canvas.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        const t = e.touches;
+        if (t.length === 1) {
+          tch.s = { x: t[0].clientX, y: t[0].clientY, t: Date.now(), cx: cam.x, cy: cam.y };
+          tch.pan = false;
+          mouse.active = true;
+          const rect = canvas.getBoundingClientRect();
+          mouse.x = t[0].clientX - rect.left;
+          mouse.y = t[0].clientY - rect.top;
+        } else if (t.length === 2) {
+          tch.s = null;
+          tch.dist = Math.hypot(t[1].clientX - t[0].clientX, t[1].clientY - t[0].clientY);
+          tch.mid = { x: (t[0].clientX + t[1].clientX) / 2, y: (t[0].clientY + t[1].clientY) / 2 };
+        }
+      }, { passive: false });
+      canvas.addEventListener("touchmove", (e) => {
+        e.preventDefault();
+        const t = e.touches;
+        if (t.length === 1 && tch.s) {
+          const dx = t[0].clientX - tch.s.x, dy = t[0].clientY - tch.s.y;
+          if (!tch.pan && dx * dx + dy * dy > 64) tch.pan = true;
+          if (tch.pan) { cam.x = tch.s.cx + dx; cam.y = tch.s.cy + dy; }
+          const rect = canvas.getBoundingClientRect();
+          mouse.x = t[0].clientX - rect.left;
+          mouse.y = t[0].clientY - rect.top;
+        } else if (t.length === 2) {
+          const dist = Math.hypot(t[1].clientX - t[0].clientX, t[1].clientY - t[0].clientY);
+          const mid = { x: (t[0].clientX + t[1].clientX) / 2, y: (t[0].clientY + t[1].clientY) / 2 };
+          const scale = dist / tch.dist;
+          const oldZoom = cam.zoom;
+          cam.zoom = Math.max(0.5, Math.min(4, cam.zoom * scale));
+          const rs = cam.zoom / oldZoom;
+          const rect = canvas.getBoundingClientRect();
+          const px = mid.x - rect.left, py = mid.y - rect.top;
+          cam.x = px - (px - cam.x) * rs;
+          cam.y = py - (py - cam.y) * rs;
+          cam.x += mid.x - tch.mid.x;
+          cam.y += mid.y - tch.mid.y;
+          tch.dist = dist;
+          tch.mid = mid;
+        }
+      }, { passive: false });
+      canvas.addEventListener("touchend", (e) => {
+        if (tch.s && !tch.pan && e.changedTouches.length) {
+          const dt = Date.now() - tch.s.t;
+          if (dt < 300 && onSelect) {
+            const rect = canvas.getBoundingClientRect();
+            const gp = screenToGraph(
+              e.changedTouches[0].clientX - rect.left,
+              e.changedTouches[0].clientY - rect.top
+            );
+            let hit = null, best = Infinity;
+            for (const n of nodes) {
+              const dx = n.sx - gp.x, dy = n.sy - gp.y;
+              const d2 = dx * dx + dy * dy;
+              const reach = n.r * 1.9 + 14;
+              if (d2 < reach * reach && d2 < best) { best = d2; hit = n; }
+            }
+            selectedNode = (hit && hit === selectedNode) ? null : hit;
+            onSelect(selectedNode);
+          }
+        }
+        tch.s = null;
+        tch.pan = false;
+        if (!e.touches.length) mouse.active = false;
       });
     }
 
@@ -302,6 +389,7 @@
       resize: resize,
       clearSelection: function () { selectedNode = null; },
       select: function (id) { selectedNode = nodeMap.get(id) || null; },
+      resetCamera: function () { if (cam) { cam.x = 0; cam.y = 0; cam.zoom = 1; } },
     };
   };
 })();

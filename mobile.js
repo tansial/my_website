@@ -12,6 +12,34 @@
     return (s) => { t.innerHTML = s; return t.value; };
   })();
 
+  /* ---------- Expertise graph (touch-enabled) ---------- */
+  let mGraphApi = null;
+
+  function initMobileGraph() {
+    if (typeof GRAPH_ALT === "undefined" || typeof initGraph !== "function") return null;
+    const labels = {
+      core: "core themes", powertrain: "powertrains", data: "data & sensing",
+      tools: "tools & methods", policy: "regulation", soft: "communication & impact",
+    };
+    const leg = document.getElementById("m-graph-legend");
+    if (leg) {
+      leg.innerHTML = Object.keys(GRAPH_ALT.clusters).map((k) => {
+        const c = GRAPH_ALT.clusters[k];
+        return '<span><i style="background:' + c + ";box-shadow:0 0 6px " + c + '"></i>' + (labels[k] || k) + "</span>";
+      }).join("");
+    }
+    return initGraph("m-graph-canvas", GRAPH_ALT, {
+      idleLabelMin: 0, emphasizeTop: true,
+      sizeBase: 2.5, sizeScale: 1.8, sizePow: 1.7,
+      touch: true,
+      onSelect: function (node) {
+        clearChips();
+        if (node) CV.setPubFilter(node.label);
+        else CV.clearPubFilter();
+      },
+    });
+  }
+
   /* ---------- Keyword chips ---------- */
   function renderChips() {
     const wrap = document.getElementById("chips");
@@ -45,23 +73,28 @@
     clearChips();
     if (wasActive) {
       CV.clearPubFilter();
+      if (mGraphApi) mGraphApi.clearSelection();
     } else {
       chip.classList.add("active");
       CV.setPubFilter(label);
+      if (mGraphApi) mGraphApi.clearSelection();
     }
   }
 
   /* ---------- Init ---------- */
   document.addEventListener("DOMContentLoaded", () => {
     if (!window.CV) return;
-    CV.renderContent();   // hero, summary, experience, skills, resources, awards, education, publications, footer
+    CV.renderContent();
     CV.setupNav();
     renderChips();
+    mGraphApi = initMobileGraph();
 
-    // when the publications "clear ✕" is tapped, also drop the chip selection
     const pf = document.getElementById("pub-filter");
     if (pf) pf.addEventListener("click", (e) => {
-      if (e.target.closest(".pf-clear")) clearChips();
+      if (e.target.closest(".pf-clear")) {
+        clearChips();
+        if (mGraphApi) mGraphApi.clearSelection();
+      }
     });
   });
 })();
