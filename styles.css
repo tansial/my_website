@@ -392,7 +392,7 @@ main [id] { scroll-margin-top: 74px; }
   color: var(--text);
   transition: all 0.16s ease;
 }
-.tag:hover { border-color: var(--accent); color: var(--glow); }
+.tag:hover { background: rgba(79,143,247,0.13); }
 
 /* ---------- Two column ---------- */
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
@@ -467,6 +467,7 @@ main [id] { scroll-margin-top: 74px; }
   color: var(--glow);
   background: rgba(79, 143, 247, 0.12);
 }
+.pub-filter[hidden] { display: none; }
 
 .pub-head { display: flex; align-items: baseline; justify-content: space-between; }
 .pub-count {

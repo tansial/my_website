@@ -152,7 +152,9 @@
   }
 
   function clearPubFilter() {
-    $("pub-filter").hidden = true;
+    const pf = $("pub-filter");
+    pf.hidden = true;
+    pf.innerHTML = "";
     renderPubList(DATA.publications);
     if (graphApi) graphApi.clearSelection();
   }
@@ -239,7 +241,7 @@
           }
         });
       },
-      { threshold: 0.08 }
+      { threshold: 0 }
     );
     targets.forEach((t) => io.observe(t));
   }
