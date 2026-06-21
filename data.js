@@ -266,6 +266,64 @@ const DATA = {
     },
   ],
 
+  /* --- Soft skills (shown as expandable pills below the expertise map) ---- */
+  softSkills: [
+    {
+      label: "Science Communication",
+      desc: "Award-winning communicator: Best 3-Minute Research Video at Politecnico di Torino (2019). Presenter at public science festivals including Focus Live and European Researchers Night, and speaker at 'Science is everywhere' seminars for high school students.",
+    },
+    {
+      label: "Presentation",
+      desc: "Regular speaker at international conferences including SAE, TAP, THIESEL, and Transport Research Arena. Presents technical findings to audiences ranging from domain experts to EU policymakers and the general public.",
+    },
+    {
+      label: "Stakeholder Engagement",
+      desc: "Supports European and UN-level policy discussions on vehicle emissions regulation. Engages with industry representatives, national authorities and institutional stakeholders in the development of EU regulatory frameworks.",
+    },
+    {
+      label: "Scientific Writing",
+      desc: "Author and co-author of 35+ peer-reviewed publications in leading journals including Journal of Cleaner Production, Energy Conversion and Management and Science of the Total Environment. Contributor to JRC technical reports and EU regulatory documentation.",
+    },
+    {
+      label: "Public Outreach",
+      desc: "Presented 'Green Driving' at Focus Live festivals in Milan and Genoa (2019). Demonstrated on-board fuel-consumption monitoring through telematics at European Researchers Night in Milan (2023). Managed the VIPV thematic zone at EUCAD 2025.",
+    },
+    {
+      label: "Teaching &amp; Mentoring",
+      desc: "Delivered 'Science is everywhere' digital seminars for high school students (2022). Guides junior researchers and trainees at JRC on experimental campaigns, data analysis and scientific methods.",
+    },
+    {
+      label: "Teamwork",
+      desc: "Awarded JRC Excellence 2025 for 'Best Team Collaboration' supporting EUCAD 2025. Collaborative work across JRC units and with external partners on large-scale experimental campaigns and multi-author research.",
+    },
+    {
+      label: "Multilingual",
+      desc: "Italian (native, C2), English (C1 — TOEFL iBT 102/120) and Spanish (B2). Works daily in multilingual EU institutional settings, engaging with international colleagues and stakeholders.",
+    },
+  ],
+
+  /* --- Conferences & events (active contributions) ----------------------- */
+  events: [
+    { year: 2026, name: "CO₂ Reduction for Transportation Systems Conference", location: "Turin, Italy" },
+    { year: 2026, name: "Transport Research Arena (TRA)", location: "Budapest, Hungary" },
+    { year: 2025, name: "Transport and Pollution Conference", location: "Rueil-Malmaison, France" },
+    { year: 2025, name: "EUCAD — European Conference on Connected and Automated Driving", location: "JRC, Ispra, Italy", note: "Managed the VIPV thematic zone; presented fuel-consumption monitoring to executive visitors" },
+    { year: 2024, name: "SAE CO₂ Reduction for Transportation Systems Conference", location: "Turin, Italy" },
+    { year: 2024, name: "Seminar on Vehicle-Integrated PhotoVoltaics &amp; Road Show", location: "JRC, Ispra, Italy" },
+    { year: 2023, name: "Transport and Air Pollution Conference", location: "Gothenburg, Sweden" },
+    { year: 2023, name: "European Researchers Night", location: "Museo della Scienza e della Tecnica, Milan, Italy", note: "Presenting on-board fuel-consumption monitoring through telematics" },
+    { year: 2022, name: "THIESEL Conference", location: "Valencia, Spain" },
+    { year: 2022, name: "SAE CO₂ Reduction for Transportation Systems Conference", location: "Turin, Italy" },
+    { year: 2022, name: "\"Science is everywhere\" — seminars for high school students", location: "Digital (3 events)" },
+    { year: 2020, name: "SAE CO₂ Reduction for Transportation Systems Conference", location: "Turin, Italy" },
+    { year: 2019, name: "Focus Live Festival", location: "Milan, Italy", note: "Presenting \"Green Driving\" in a thematic zone" },
+    { year: 2019, name: "Focus Live Festival", location: "Genoa, Italy", note: "Presenting \"Green Driving\" in a thematic zone" },
+    { year: 2019, name: "WCX World Congress Experience", location: "Detroit, USA" },
+    { year: 2018, name: "SAENA Workshop", location: "Reggio Emilia, Italy", note: "Presenting PHEV regulation and implications" },
+    { year: 2017, name: "PTNSS Congress", location: "Poznan, Poland" },
+    { year: 2017, name: "SAE ICE Conference", location: "Capri, Italy" },
+  ],
+
   /* --- Published resources ----------------------------------------------- */
   resources: [
     {

@@ -98,6 +98,60 @@
     });
   }
 
+  /* ---------- Soft skills (expandable pills) ---------- */
+  function renderSoftSkills() {
+    const wrap = $("soft-skills");
+    if (!wrap || !DATA.softSkills) return;
+
+    const title = el("div", "soft-title", "Soft Skills &amp; Impact");
+    const pills = el("div", "soft-pills");
+    const desc = el("div", "soft-desc");
+    desc.hidden = true;
+
+    DATA.softSkills.forEach((sk) => {
+      const pill = document.createElement("button");
+      pill.type = "button";
+      pill.className = "soft-pill";
+      pill.textContent = sk.label.replace(/&amp;/g, "&");
+      pill.addEventListener("click", () => {
+        const wasActive = pill.classList.contains("active");
+        pills.querySelectorAll(".soft-pill").forEach((p) => p.classList.remove("active"));
+        if (wasActive) {
+          desc.hidden = true;
+          desc.innerHTML = "";
+        } else {
+          pill.classList.add("active");
+          desc.innerHTML = '<span class="soft-desc-label">' + sk.label + "</span>" + sk.desc;
+          desc.hidden = false;
+        }
+      });
+      pills.appendChild(pill);
+    });
+
+    wrap.appendChild(title);
+    wrap.appendChild(pills);
+    wrap.appendChild(desc);
+  }
+
+  /* ---------- Events ---------- */
+  function renderEvents() {
+    const wrap = $("events");
+    if (!wrap || !DATA.events) return;
+    let currentYear = null;
+    DATA.events.forEach((ev) => {
+      if (ev.year !== currentYear) {
+        currentYear = ev.year;
+        wrap.appendChild(el("div", "ev-year", String(currentYear)));
+      }
+      const item = el("div", "ev");
+      const note = ev.note ? '<p class="ev-note">' + ev.note + "</p>" : "";
+      item.innerHTML =
+        '<p class="ev-name">' + ev.name + "</p>" +
+        '<p class="ev-loc">' + ev.location + "</p>" + note;
+      wrap.appendChild(item);
+    });
+  }
+
   /* ---------- Publications (grouped by year, filterable) ---------- */
   let graphApi = null;
 
@@ -164,7 +218,7 @@
     if (typeof GRAPH_ALT === "undefined" || typeof initGraph !== "function") return;
     const labels = {
       core: "core themes", powertrain: "powertrains", data: "data & sensing",
-      tools: "tools & methods", policy: "regulation", soft: "communication & impact",
+      tools: "tools & methods", policy: "regulation",
     };
     const leg = $("graph-legend");
     if (leg) {
@@ -259,6 +313,8 @@
     renderSummary();
     renderTimeline("experience", DATA.experience, true);
     renderTimeline("education", DATA.education, false);
+    renderSoftSkills();
+    renderEvents();
     renderSkills();
     renderResources();
     renderAwards();

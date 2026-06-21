@@ -317,6 +317,101 @@ main [id] { scroll-margin-top: 74px; }
   display: inline-block;
 }
 
+/* ---------- Soft skills (pills below the expertise map) ---------- */
+.soft-skills { margin-top: 18px; }
+.soft-title {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #f6a93b;
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.soft-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(246, 169, 59, 0.4), transparent);
+}
+.soft-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.soft-pill {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 0.82rem;
+  color: var(--text);
+  background: rgba(246, 169, 59, 0.08);
+  border: 1px solid rgba(246, 169, 59, 0.3);
+  border-radius: 999px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.soft-pill::before {
+  content: "";
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #f6a93b;
+  box-shadow: 0 0 6px #f6a93b;
+  margin-right: 7px;
+  vertical-align: middle;
+}
+.soft-pill:hover {
+  background: rgba(246, 169, 59, 0.16);
+  border-color: rgba(246, 169, 59, 0.55);
+}
+.soft-pill.active {
+  background: rgba(246, 169, 59, 0.22);
+  border-color: #f6a93b;
+  color: #fff;
+  box-shadow: 0 0 0 1px #f6a93b, 0 0 12px -2px rgba(246, 169, 59, 0.5);
+}
+.soft-desc {
+  background: rgba(246, 169, 59, 0.05);
+  border: 1px solid rgba(246, 169, 59, 0.18);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+.soft-desc[hidden] { display: none; }
+.soft-desc-label {
+  display: block;
+  font-weight: 700;
+  color: #f6a93b;
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+}
+
+/* ---------- Events ---------- */
+.events { display: flex; flex-direction: column; }
+.ev-year {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--brand);
+  -webkit-text-stroke: 0.3px var(--accent);
+  margin: 14px 0 4px;
+}
+.events .ev-year:first-child { margin-top: 0; }
+.ev {
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+}
+.ev-name { font-weight: 600; margin: 0; font-size: 0.94rem; }
+.ev-loc { color: var(--text-dim); font-size: 0.84rem; margin: 2px 0 0; }
+.ev-note { color: var(--text-mute); font-size: 0.82rem; font-style: italic; margin: 3px 0 0; }
+
 /* ---------- Summary ---------- */
 .summary { margin: 0; color: var(--text-dim); font-size: 1.02rem; }
 .summary .hl { color: var(--text); font-weight: 600; }

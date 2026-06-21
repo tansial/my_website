@@ -2,7 +2,7 @@
    graph-alt-data.js — "Option B" expertise map.
    Node size (s) encodes how central / recurrent the keyword is across
    Alessandro's roles and publications. `top:true` adds an emphasis halo.
-   Adds a new "soft / impact" cluster (communication, outreach, etc.).
+   Soft skills are shown separately as expandable pills below the map.
    ========================================================================== */
 
 const GRAPH_ALT = {
@@ -12,7 +12,6 @@ const GRAPH_ALT = {
     data:        "#2dd4bf",  // data & instrumentation
     tools:       "#5b8def",  // tools & methods
     policy:      "#a78bfa",  // regulation & policy
-    soft:        "#f6a93b",  // warm amber — communication & impact
   },
   nodes: [],
   edges: [],
@@ -63,16 +62,6 @@ GRAPH_ALT.nodes = [
   { id: "Life Cycle Assessment",      c: "policy", s: 1.1 },
   { id: "WLTP",                       c: "policy", s: 1.1 },
 
-  /* ---- soft skills / impact (NEW) ---- */
-  { id: "Science Communication",      c: "soft", s: 2.2, top: true },
-  { id: "Presentation",               c: "soft", s: 1.8 },
-  { id: "Stakeholder Engagement",     c: "soft", s: 1.8 },
-  { id: "Scientific Writing",         c: "soft", s: 1.7 },
-  { id: "Public Outreach",            c: "soft", s: 1.5 },
-  { id: "Teaching &amp; Mentoring",       c: "soft", s: 1.3 },
-  { id: "Teamwork",                   c: "soft", s: 1.4 },
-  { id: "Multilingual",               c: "soft", s: 1.1 },
-
   /* ---- research topics (smaller) ---- */
   { id: "VIPV",                       c: "powertrain", s: 1.2 },
   { id: "Regenerative Braking",       c: "powertrain", s: 1.1 },
@@ -103,7 +92,6 @@ GRAPH_ALT.edges = [
   ["Data Analysis", "Modelling &amp; Simulation"],
   ["Data Analysis", "OBFCM"],
   ["Data Analysis", "Experimental Testing"],
-  ["Data Analysis", "Scientific Writing"],
 
   // real-world monitoring
   ["Real-World Monitoring", "OBFCM"],
@@ -161,24 +149,7 @@ GRAPH_ALT.edges = [
   ["EU Regulations", "WLTP"],
   ["EU Regulations", "Life Cycle Assessment"],
   ["Policy Support", "EU Regulations"],
-  ["Policy Support", "Stakeholder Engagement"],
   ["Policy Support", "Real-World Monitoring"],
   ["Policy Support", "Life Cycle Assessment"],
 
-  // soft skills woven into the work
-  ["Science Communication", "Public Outreach"],
-  ["Science Communication", "Presentation"],
-  ["Science Communication", "Data Visualization"],
-  ["Science Communication", "Teaching &amp; Mentoring"],
-  ["Science Communication", "Scientific Writing"],
-  ["Presentation", "Stakeholder Engagement"],
-  ["Presentation", "Public Outreach"],
-  ["Stakeholder Engagement", "Policy Support"],
-  ["Stakeholder Engagement", "Multilingual"],
-  ["Stakeholder Engagement", "Teamwork"],
-  ["Scientific Writing", "CO₂ Emissions"],
-  ["Data Visualization", "Data Pipelines"],
-  ["Teamwork", "Policy Support"],
-  ["Public Outreach", "Multilingual"],
-  ["Teaching &amp; Mentoring", "Public Outreach"],
 ];
