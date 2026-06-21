@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=3" />
-  <link rel="stylesheet" href="mobile.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="stylesheet" href="mobile.css?v=4" />
 </head>
 <body>
   <div class="bg-grid" aria-hidden="true"></div>
@@ -20,7 +20,7 @@
       <a class="topnav-brand" href="#hero">A. Tansini</a>
       <div class="topnav-links">
         <a href="#hero">About</a>
-        <a href="#expertise">Expertise</a>
+        <a href="#topics">Topics</a>
         <a href="#experience-section">Experience</a>
         <a href="#skills-section">Skills</a>
         <a href="#education-section">Education</a>
@@ -40,22 +40,10 @@
       <p id="summary" class="summary"></p>
     </section>
 
-    <!-- ===== EXPERTISE GRAPH (touch-enabled) ===== -->
-    <section id="expertise" class="graph-section" aria-label="Expertise map">
-      <div class="section-eyebrow"><span class="dot"></span> EXPERTISE MAP
-        <span class="eyebrow-hint">— tap a keyword to filter publications</span>
-      </div>
-      <div class="graph-stage m-graph-stage">
-        <canvas id="m-graph-canvas"></canvas>
-        <div id="m-graph-legend" class="graph-legend"></div>
-      </div>
-      <p class="m-graph-hint">pinch to zoom · drag to pan</p>
-    </section>
-
-    <!-- ===== KEYWORD CHIPS (quick-access alternative) ===== -->
+    <!-- ===== KEYWORD CHIPS ===== -->
     <section class="card" id="topics">
       <div class="topics-head">
-        <h2 class="section-title">Topics</h2>
+        <h2 class="section-title">Expertise</h2>
         <span class="topics-hint">tap a topic to see related publications</span>
       </div>
       <div id="chips" class="chips"></div>
@@ -112,10 +100,9 @@
     </div>
   </main>
 
-  <script src="data.js?v=3"></script>
-  <script src="graph-alt-data.js?v=3"></script>
-  <script src="graph-engine.js?v=3"></script>
-  <script src="main.js?v=3"></script>
-  <script src="mobile.js?v=3"></script>
+  <script src="data.js?v=4"></script>
+  <script src="graph-alt-data.js?v=4"></script>
+  <script src="main.js?v=4"></script>
+  <script src="mobile.js?v=4"></script>
 </body>
 </html>
