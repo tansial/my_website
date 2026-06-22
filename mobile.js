@@ -41,7 +41,7 @@
       header.type = "button";
       header.className = "chip-header";
       header.style.setProperty("--c", color);
-      header.innerHTML = '<span class="chip-chevron">&#9656;</span>' + (clusterLabels[key] || key);
+      header.innerHTML = (clusterLabels[key] || key) + '<span class="chip-chevron">&#9662;</span>';
       header.addEventListener("click", function () {
         var wasOpen = group.classList.contains("open");
         wrap.querySelectorAll(".chip-group.open").forEach(function (g) { g.classList.remove("open"); });

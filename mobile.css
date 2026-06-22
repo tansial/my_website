@@ -43,21 +43,13 @@
   -webkit-tap-highlight-color: transparent;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
-.chip-header::before {
-  content: "";
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--c);
-  box-shadow: 0 0 8px var(--c);
-  flex-shrink: 0;
-}
 .chip-chevron {
   margin-left: auto;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: var(--text-mute);
   transition: transform 0.2s ease;
 }
-.chip-group.open .chip-chevron { transform: rotate(90deg); }
+.chip-group.open .chip-chevron { transform: rotate(180deg); }
 .chip-group.open .chip-header {
   border-color: var(--c);
   background: color-mix(in srgb, var(--c) 18%, transparent);
