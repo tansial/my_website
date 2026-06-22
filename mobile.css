@@ -22,9 +22,57 @@
 }
 .chips {
   display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.chip-header {
+  --c: #5b8def;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--text);
+  background: color-mix(in srgb, var(--c) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c) 35%, var(--border));
+  border-radius: 12px;
+  padding: 11px 16px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.chip-header::before {
+  content: "";
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 8px var(--c);
+  flex-shrink: 0;
+}
+.chip-chevron {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--text-mute);
+  transition: transform 0.2s ease;
+}
+.chip-group.open .chip-chevron { transform: rotate(90deg); }
+.chip-group.open .chip-header {
+  border-color: var(--c);
+  background: color-mix(in srgb, var(--c) 18%, transparent);
+  border-radius: 12px 12px 0 0;
+}
+.chip-body {
+  display: none;
   flex-wrap: wrap;
   gap: 8px;
+  padding: 10px 12px 12px;
+  border: 1px solid color-mix(in srgb, var(--c) 35%, var(--border));
+  border-top: none;
+  border-radius: 0 0 12px 12px;
 }
+.chip-group.open .chip-body { display: flex; }
 .chip {
   --c: #5b8def;
   font-family: "Inter", sans-serif;
@@ -62,6 +110,9 @@
 @supports not (color: color-mix(in srgb, red, blue)) {
   .chip { background: rgba(79,143,247,0.12); border-color: var(--border-2); }
   .chip.active { background: rgba(79,143,247,0.26); border-color: var(--accent); }
+  .chip-header { background: rgba(79,143,247,0.08); border-color: var(--border-2); }
+  .chip-group.open .chip-header { background: rgba(79,143,247,0.16); border-color: var(--accent); }
+  .chip-body { border-color: var(--border-2); }
 }
 
 /* ---------- Desktop-version link ---------- */

@@ -217,7 +217,7 @@
   function initExpertiseGraph() {
     if (typeof GRAPH_ALT === "undefined" || typeof initGraph !== "function") return;
     const labels = {
-      core: "core themes", powertrain: "powertrains", data: "data & sensing",
+      core: "core themes", powertrain: "technologies", data: "data & sensing",
       tools: "tools & methods", policy: "regulation",
     };
     const leg = $("graph-legend");

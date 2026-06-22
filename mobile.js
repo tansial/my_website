@@ -12,27 +12,61 @@
     return (s) => { t.innerHTML = s; return t.value; };
   })();
 
-  /* ---------- Keyword chips ---------- */
+  /* ---------- Keyword chips (grouped by cluster, collapsible) ---------- */
   function renderChips() {
     const wrap = document.getElementById("chips");
     if (!wrap || typeof GRAPH_ALT === "undefined") return;
     const colors = GRAPH_ALT.clusters;
+    const clusterLabels = {
+      core: "Core Themes", powertrain: "Technologies", data: "Data & Sensing",
+      tools: "Tools & Methods", policy: "Regulation",
+    };
 
-    // largest / most-central keywords first
-    const nodes = GRAPH_ALT.nodes.slice().sort((a, b) => b.s - a.s);
+    var groups = {};
+    var order = Object.keys(GRAPH_ALT.clusters);
+    order.forEach(function (k) { groups[k] = []; });
+    GRAPH_ALT.nodes.slice().sort(function (a, b) { return b.s - a.s; }).forEach(function (n) {
+      if (groups[n.c]) groups[n.c].push(n);
+    });
 
-    nodes.forEach((n) => {
-      const label = decode(n.id);
-      const chip = document.createElement("button");
-      chip.type = "button";
-      chip.className = "chip" + (n.top ? " is-top" : "");
-      chip.textContent = label;
-      chip.dataset.tag = label;
-      chip.style.setProperty("--c", colors[n.c] || "#5b8def");
-      // size by importance
-      chip.style.fontSize = (0.74 + Math.min(n.s, 3) * 0.085).toFixed(3) + "rem";
-      chip.addEventListener("click", () => toggleChip(chip, label));
-      wrap.appendChild(chip);
+    order.forEach(function (key) {
+      var nodes = groups[key];
+      if (!nodes.length) return;
+      var color = colors[key];
+
+      var group = document.createElement("div");
+      group.className = "chip-group";
+
+      var header = document.createElement("button");
+      header.type = "button";
+      header.className = "chip-header";
+      header.style.setProperty("--c", color);
+      header.innerHTML = '<span class="chip-chevron">&#9656;</span>' + (clusterLabels[key] || key);
+      header.addEventListener("click", function () {
+        var wasOpen = group.classList.contains("open");
+        wrap.querySelectorAll(".chip-group.open").forEach(function (g) { g.classList.remove("open"); });
+        if (!wasOpen) group.classList.add("open");
+      });
+
+      var body = document.createElement("div");
+      body.className = "chip-body";
+
+      nodes.forEach(function (n) {
+        var label = decode(n.id);
+        var chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "chip" + (n.top ? " is-top" : "");
+        chip.textContent = label;
+        chip.dataset.tag = label;
+        chip.style.setProperty("--c", color);
+        chip.style.fontSize = (0.74 + Math.min(n.s, 3) * 0.085).toFixed(3) + "rem";
+        chip.addEventListener("click", function () { toggleChip(chip, label); });
+        body.appendChild(chip);
+      });
+
+      group.appendChild(header);
+      group.appendChild(body);
+      wrap.appendChild(group);
     });
   }
 
