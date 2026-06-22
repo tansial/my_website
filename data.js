@@ -26,7 +26,7 @@ const DATA = {
 
   /* --- Professional summary ---------------------------------------------- */
   summary:
-    "Energy engineer with a PhD in Energetics and over nine years of experience in " +
+    "Energy engineer with a PhD in Energetics and over ten years of experience in " +
     "scientific research on road-vehicle CO₂ emissions, innovative technologies and " +
     "sustainable transport. Deep knowledge of data collection and analysis — " +
     "experimental measurements, OBD/CAN, GNSS, telematics, web scraping and data reporting. " +
