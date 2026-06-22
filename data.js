@@ -296,10 +296,6 @@ const DATA = {
       label: "Teamwork",
       desc: "Awarded JRC Excellence 2025 for 'Best Team Collaboration' supporting EUCAD 2025. Collaborative work across JRC units and with external partners on large-scale experimental campaigns and multi-author research.",
     },
-    {
-      label: "Multilingual",
-      desc: "Italian (native, C2), English (C1 — TOEFL iBT 102/120) and Spanish (B2). Works daily in multilingual EU institutional settings, engaging with international colleagues and stakeholders.",
-    },
   ],
 
   /* --- Conferences & events (active contributions) ----------------------- */
