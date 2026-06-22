@@ -45,7 +45,7 @@
 }
 .chip-chevron {
   margin-left: auto;
-  font-size: 0.9rem;
+  font-size: 1.8rem;
   color: var(--text-mute);
   transition: transform 0.2s ease;
 }
