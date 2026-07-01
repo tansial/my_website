@@ -8,9 +8,11 @@ const DATA = {
   /* --- Profile / hero card ----------------------------------------------- */
   profile: {
     name: "Alessandro Tansini",
-    title: "Researcher, Data Analyst &amp; Policy Support",
+    title: "Researcher, Data Science &amp; Policy Support",
     subtitle: "Transport Decarbonisation",
     photo: "assets/photo.png",
+    cv: "assets/Alessandro-Tansini-CV.pdf",
+    openTo: "Open to research / data science and policy roles in sustainable transport · EU-based or remote",
     location: "Ispra, Italy",
     email: "tansini.ale@gmail.com",
     birth: "06/08/1990, Milan, Italy",
@@ -158,19 +160,21 @@ const DATA = {
   /* --- Professional experience ------------------------------------------- */
   experience: [
     {
-      period: "Sep 2020 – Jun 2026",
+      period: "Sep 2020 – Present",
       role: "Scientific Policy Officer",
       org: "European Commission’s Joint Research Centre (JRC), Ispra, Italy",
-      note: "Sustainable, Smart and Safe Transport Unit — real-world monitoring of road-vehicle emissions &amp; modeller",
+      note: "Sustainable, Smart and Safe Transport Unit — real-world emissions monitoring and modelling",
       points: [
         "Review, collection and analysis of literature on road-vehicle CO₂ emissions and energy consumption",
-        "Design and execution of experimental campaigns for battery-electric and hydrogen fuel-cell vehicles",
+        "Design and execution of experimental campaigns for battery-electric, plug-in hybrid and hydrogen fuel-cell vehicles",
+        "Design of an experimental campaign based on telemetry data from IoT devices, with automatic data ingestion, correction, processing and reporting",
         "Development and maintenance of CO₂ calculation tools extended to innovative powertrains (BEV, PHEV, H₂)",
         "Analysis of monitoring data under EU Reg. 2021/392; reporting on real-world fuel consumption (ref. 340201/2019/817718/SER/CLIMA.C.4)",
         "Scientific evaluation of amendments to EU Reg. 2017/1151 on PHEV Utility Factors, CO₂ and energy consumption",
         "Assessment of Vehicle-Integrated PhotoVoltaics (VIPV) environmental impact",
         "Amendment of UN R154 on the definition of energy into the vehicle for OBFCM of externally chargeable vehicles",
         "Supported European and UN-level discussions on modelling in-use PHEV consumption for Life Cycle Assessment",
+        "Analysis of M1 and N1 monitoring data from vehicles registered in Europe to develop a simple CO₂ emissions calculation formula supporting the European Individual Vehicle Approval (IVA) scheme",
       ],
     },
     {

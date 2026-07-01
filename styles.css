@@ -11,7 +11,7 @@
   --border-2:  #2a3f63;
   --text:      #dce6f5;
   --text-dim:  #9db0cc;
-  --text-mute: #6c819f;
+  --text-mute: #8ba0c0;
   --brand:     #1F497D;
   --accent:    #4f8ff7;
   --accent-2:  #38bdf8;
@@ -196,11 +196,31 @@ main [id] { scroll-margin-top: 74px; }
   font-size: 1.05rem;
 }
 .hero-sub {
-  margin: 0;
+  margin-left: 8px;
   color: var(--text-dim);
   font-family: "JetBrains Mono", monospace;
   font-size: 0.82rem;
+  font-weight: 400;
   letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.hero-open {
+  margin: 12px 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 1px solid rgba(56,189,248,0.35);
+  border-radius: 999px;
+  background: rgba(56,189,248,0.08);
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+.hero-open .ic {
+  color: var(--accent-2);
+  font-size: 0.7rem;
+  filter: drop-shadow(0 0 6px var(--glow));
 }
 .hero-meta {
   margin: 16px 0 0;
@@ -220,6 +240,14 @@ main [id] { scroll-margin-top: 74px; }
   flex-wrap: wrap;
   gap: 10px;
 }
+.hero-cv {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+  margin-top: 12px;
+}
+.hero-cv .hero-meta { margin: 0; }
 .chip-link {
   display: inline-flex;
   align-items: center;
@@ -245,6 +273,22 @@ main [id] { scroll-margin-top: 74px; }
   border-color: var(--accent);
   background: rgba(79,143,247,0.16);
   transform: translateY(-1px);
+}
+/* Primary "Download CV" action */
+.chip-cv {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #061020;
+  font-weight: 600;
+}
+.chip-cv::before {
+  background: #061020;
+  box-shadow: none;
+}
+.chip-cv:hover {
+  background: var(--accent-2);
+  border-color: var(--accent-2);
+  color: #061020;
 }
 
 /* ---------- Graph section ---------- */
@@ -635,7 +679,8 @@ main [id] { scroll-margin-top: 74px; }
   .wrap { padding: 26px 14px 60px; gap: 20px; }
   .card { padding: 24px 20px; }
   .hero { grid-template-columns: 1fr; text-align: center; justify-items: center; gap: 18px; }
-  .hero-meta, .hero-links { justify-content: center; }
+  .hero-meta, .hero-links, .hero-cv { justify-content: center; }
+  .hero-open { align-self: center; }
   .hero::before { display: none; }
   .skills { grid-template-columns: 1fr; }
   .two-col { grid-template-columns: 1fr; }

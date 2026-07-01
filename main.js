@@ -18,18 +18,27 @@
     const links = p.links.map(
       (l) => `<a class="chip-link" href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`
     ).join("");
+    const openTo = p.openTo
+      ? `<p class="hero-open"><span class="ic">&#9670;</span>${p.openTo}</p>`
+      : "";
+    const cvBtn = p.cv
+      ? `<a class="chip-link chip-cv" href="${p.cv}" download>Download CV (PDF) &#8595;</a>`
+      : "";
 
     $("hero").innerHTML = `
       <img class="hero-photo" src="${p.photo}" alt="Portrait of ${p.name}" />
       <div class="hero-body">
         <h1 class="hero-name">${p.name}</h1>
-        <p class="hero-title">${p.title}</p>
-        <p class="hero-sub">// ${p.subtitle}</p>
-        <div class="hero-meta">
-          <span><span class="ic">@</span><a href="mailto:${p.email}">${p.email}</a></span>
-          <span><span class="ic">&#9678;</span>${p.location}</span>
-        </div>
+        <p class="hero-title">${p.title} <span class="hero-sub">// ${p.subtitle}</span></p>
+        ${openTo}
         <div class="hero-links">${links}</div>
+        <div class="hero-cv">
+          ${cvBtn}
+          <div class="hero-meta">
+            <span><span class="ic">@</span><a href="mailto:${p.email}">${p.email}</a></span>
+            <span><span class="ic">&#9678;</span>${p.location}</span>
+          </div>
+        </div>
       </div>`;
   }
 
