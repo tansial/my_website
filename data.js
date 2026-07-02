@@ -163,7 +163,7 @@ const DATA = {
       period: "Sep 2020 – Present",
       role: "Scientific Policy Officer",
       org: "European Commission’s Joint Research Centre (JRC), Ispra, Italy",
-      note: "Sustainable, Smart and Safe Transport Unit — real-world emissions monitoring and modelling",
+      note: "Sustainable, Smart and Safe Mobility Unit — real-world emissions monitoring and modelling",
       points: [
         "Review, collection and analysis of literature on road-vehicle CO₂ emissions and energy consumption",
         "Design and execution of experimental campaigns for battery-electric, plug-in hybrid and hydrogen fuel-cell vehicles",
@@ -181,7 +181,7 @@ const DATA = {
       period: "Dec 2019 – Sep 2020",
       role: "External Expert",
       org: "European Commission’s Joint Research Centre (JRC), Ispra, Italy",
-      note: "Ad-hoc expertise on hybrid-vehicle measurement, operation, and data collection &amp; analysis",
+      note: "Sustainable, Smart and Safe Mobility Unit — ad-hoc expertise on hybrid-vehicle measurement, operation, and data collection &amp; analysis",
       points: [
         "Literature review on hybrid-electric-vehicle CO₂ emissions and energy consumption",
         "Dedicated experimental campaigns (vehicle testing in lab and on-road)",
@@ -192,7 +192,7 @@ const DATA = {
       period: "Dec 2016 – Dec 2019",
       role: "Research Fellow",
       org: "European Commission’s Joint Research Centre (JRC), Ispra, Italy",
-      note: "Development of flexible calculation tools for the road-vehicle CO₂ EU regulatory framework",
+      note: "Sustainable Transport Unit — development of flexible calculation tools for the road-vehicle CO₂ EU regulatory framework",
       points: [
         "Literature review on CO₂ emissions calculation and monitoring for road vehicles",
         "Design and execution of experimental vehicle-testing campaigns (lab and on-road)",
